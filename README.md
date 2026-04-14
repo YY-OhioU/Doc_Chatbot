@@ -12,6 +12,13 @@ Lightweight local CLI scaffold for experimenting with a multi-agent, tool-driven
   - Planner (LLM-driven)
   - Synthesizer (LLM-driven)
   - Verifier (LLM-driven)
+- Orchestrator with full pipeline stages
+- Shared run state object
+- Structured trace/event logging
+- Agent modules:
+  - Planner
+  - Synthesizer
+  - Verifier
 - Tool modules:
   - Paper locator
   - Section locator
@@ -43,12 +50,7 @@ export LLM_MODEL=Qwen/Qwen2.5-7B-Instruct
 python main_cli.py
 ```
 
-### Mock mode (for local smoke tests without vLLM)
-
-```bash
-export LLM_PROVIDER=mock
-python main_cli.py
-```
+Then type a question and the CLI will print intermediate pipeline events and a final answer.
 
 ## Pipeline stages
 
