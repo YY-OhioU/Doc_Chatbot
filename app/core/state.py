@@ -13,3 +13,6 @@ class RunState:
     verifier_result: dict[str, Any] = field(default_factory=dict)
     metadata: dict[str, Any] = field(default_factory=dict)
     final_answer: str = ""
+    iteration: int = 0
+    max_iterations: int = 0
+    verifier_history: list[dict[str, Any]] = field(default_factory=list)

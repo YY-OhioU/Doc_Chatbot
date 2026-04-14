@@ -5,6 +5,13 @@ Lightweight local CLI scaffold for experimenting with a multi-agent, tool-driven
 ## What this includes
 
 - CLI entrypoint (`main_cli.py`)
+- Looping orchestrator with verifier-driven retry capability
+- Shared run state object
+- Structured trace/event logging
+- Agent modules:
+  - Planner (LLM-driven)
+  - Synthesizer (LLM-driven)
+  - Verifier (LLM-driven)
 - Orchestrator with full pipeline stages
 - Shared run state object
 - Structured trace/event logging
@@ -16,9 +23,28 @@ Lightweight local CLI scaffold for experimenting with a multi-agent, tool-driven
   - Paper locator
   - Section locator
   - Passage reader
-- LLM abstraction + mock implementation
+- LLM abstraction + OpenAI-compatible client for local vLLM
 
 ## Run
+
+1) Install dependencies:
+
+```bash
+pip install openai
+```
+
+2) Ensure your local vLLM server is running in OpenAI-compatible mode (example: `http://127.0.0.1:8000/v1`).
+
+3) Set environment variables (optional defaults shown):
+
+```bash
+export LLM_PROVIDER=openai_compat
+export LLM_BASE_URL=http://127.0.0.1:8000/v1
+export LLM_API_KEY=local-dev-key
+export LLM_MODEL=Qwen/Qwen2.5-7B-Instruct
+```
+
+4) Run CLI:
 
 ```bash
 python main_cli.py
@@ -34,7 +60,8 @@ Then type a question and the CLI will print intermediate pipeline events and a f
 4. Section locator
 5. Synthesizer
 6. Verifier
-7. Final answer output
+7. Retry/replan loop if verifier rejects
+8. Final answer output
 
 ## Notes
 
